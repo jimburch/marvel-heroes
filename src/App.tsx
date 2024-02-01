@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Results, Team } from "./components";
+
 import "./App.css";
-import { getCharacters } from "./api/characters";
 
 function App() {
-  // const [characters, setCharacters] = useState([]);
-
-  useEffect(() => {
-    const fetchHeroes = async () => {
-      await getCharacters().then((response) => {
-        console.log(response);
-      });
-    };
-    fetchHeroes();
-  }, []);
+  const [team, setTeam] = useState<object[]>([]);
 
   return (
     <main>
-      <div>Main space</div>
+      <h1>Main space</h1>
+      <Team team={team} setTeam={setTeam} />
+      <Results setTeam={setTeam} />
     </main>
   );
 }
