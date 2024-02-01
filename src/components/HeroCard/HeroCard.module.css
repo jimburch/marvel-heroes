@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.root > * {
+  margin-bottom: 4px;
+}
+
 .image {
   max-height: 200px;
   width: auto;

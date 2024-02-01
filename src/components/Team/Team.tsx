@@ -19,7 +19,6 @@ export default function Team({ team, setTeam }: TeamProps) {
 
   return (
     <div className={styles.root}>
-      <h1>Team</h1>
       <div className={styles.team}>
         {team.length
           ? team.map((hero: Hero) => (

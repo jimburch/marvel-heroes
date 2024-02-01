@@ -1,13 +1,19 @@
 import { generateHash, generateTimestamp } from "../utils/hash";
 
-export const getCharacters = async (search?: string) => {
+interface GetCharactersProps {
+  search?: string;
+  offset?: number;
+}
+
+export const getCharacters = async ({ search, offset }: GetCharactersProps) => {
   const ts = generateTimestamp();
   const publicKey = process.env.REACT_APP_MARVEL_PUBLIC_API_KEY;
   const hash = generateHash();
 
   const seachQuery = search ? `&nameStartsWith=${search}` : "";
+  const offsetQuery = offset ? `&offset=${offset}` : "";
 
-  const url = `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}${seachQuery}`;
+  const url = `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}${seachQuery}${offsetQuery}`;
 
   return fetch(url)
     .then((response) => response.json())

@@ -9,8 +9,10 @@ function App() {
 
   return (
     <main>
-      <h1>Assemble!</h1>
-      <h3>Build Your Team. Save the World.</h3>
+      <div className="title">
+        <h1>Assemble!</h1>
+        <h3>Build Your Team. Save the World.</h3>
+      </div>
       <Team team={team} setTeam={setTeam} />
       <Results setTeam={setTeam} />
     </main>

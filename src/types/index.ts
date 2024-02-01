@@ -13,4 +13,5 @@ export interface HeroResults {
   count: number;
   limit: number;
   offset: number;
+  total: number;
 }

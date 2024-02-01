@@ -11,26 +11,43 @@ interface ResultsProps {
 export default function Results({ setTeam }: ResultsProps) {
   const [query, setQuery] = useState("");
   const [heroResults, setHeroResults] = useState<HeroResults>();
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     const fetchHeroes = async () => {
-      await getCharacters().then((response) => {
+      await getCharacters({}).then((response) => {
         setHeroResults(response);
       });
     };
     fetchHeroes();
   }, []);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement | HTMLButtonElement>,
+  ) {
     e.preventDefault();
-    await getCharacters(query).then((response) => {
+    setOffset(0);
+    await getCharacters({ search: query }).then((response) => {
       setHeroResults(response);
     });
   }
 
+  async function handlePagination(
+    e: React.MouseEvent<HTMLButtonElement>,
+    direction: "prev" | "next",
+  ) {
+    e.preventDefault();
+    const newOffset = direction === "prev" ? offset - 1 : offset + 1;
+    await getCharacters({ search: query, offset: newOffset }).then(
+      (response) => {
+        setHeroResults(response);
+      },
+    );
+    setOffset(newOffset);
+  }
+
   function handleAddToTeam(e: React.MouseEvent<HTMLButtonElement>, hero: Hero) {
     e.preventDefault();
-    console.log(hero);
     setTeam((prevTeam) => [...prevTeam, hero]);
   }
 
@@ -40,28 +57,58 @@ export default function Results({ setTeam }: ResultsProps) {
         <input
           type="text"
           placeholder="Search for an epic hero..."
+          value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
         <button type="submit">Search</button>
+        <button
+          onClick={() => {
+            setQuery("");
+            const inputElement = document.querySelector(
+              'input[type="text"]',
+            ) as HTMLInputElement;
+            if (inputElement) {
+              inputElement.value = "";
+            }
+          }}
+        >
+          Reset
+        </button>
       </form>
-      <h1>Results</h1>
-      <div className={styles.results}>
-        {heroResults?.results.length &&
-          heroResults?.results.map((hero: Hero) => (
-            <div key={hero.id} className={styles.hero}>
-              <HeroCard
-                key={hero.id}
-                id={hero.id}
-                name={hero.name}
-                description={hero.description}
-                imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-              />
-              <button onClick={(e) => handleAddToTeam(e, hero)}>
-                Add to Team
-              </button>
-            </div>
-          ))}
-      </div>
+
+      {heroResults?.results.length ? (
+        <div>
+          <p>{`Showing results ${offset * 20 + 1}-${Math.min((offset + 1) * 20, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
+          <button
+            disabled={!offset}
+            onClick={(e) => handlePagination(e, "prev")}
+          >
+            Previous
+          </button>
+          <button
+            onClick={(e) => handlePagination(e, "next")}
+            disabled={(offset + 1) * 20 >= heroResults?.total}
+          >
+            Next
+          </button>
+          <div className={styles.results}>
+            {heroResults?.results.map((hero: Hero) => (
+              <div key={hero.id} className={styles.hero}>
+                <HeroCard
+                  key={hero.id}
+                  id={hero.id}
+                  name={hero.name}
+                  description={hero.description}
+                  imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                />
+                <button onClick={(e) => handleAddToTeam(e, hero)}>
+                  Add to Team
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
