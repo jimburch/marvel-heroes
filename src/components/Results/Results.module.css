@@ -7,4 +7,17 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero {
+  padding: 10px;
+  margin: 5px;
+  background: pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 300px;
+  width: 220px;
 }

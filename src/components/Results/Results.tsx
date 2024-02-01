@@ -30,6 +30,7 @@ export default function Results({ setTeam }: ResultsProps) {
 
   function handleAddToTeam(e: React.MouseEvent<HTMLButtonElement>, hero: Hero) {
     e.preventDefault();
+    console.log(hero);
     setTeam((prevTeam) => [...prevTeam, hero]);
   }
 
@@ -47,7 +48,7 @@ export default function Results({ setTeam }: ResultsProps) {
       <div className={styles.results}>
         {heroResults?.results.length &&
           heroResults?.results.map((hero: Hero) => (
-            <div key={hero.id}>
+            <div key={hero.id} className={styles.hero}>
               <HeroCard
                 key={hero.id}
                 id={hero.id}

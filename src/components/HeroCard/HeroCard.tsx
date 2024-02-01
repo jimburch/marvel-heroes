@@ -16,9 +16,12 @@ export default function HeroCard({
 }: HeroProps) {
   return (
     <div className={styles.root}>
-      <h2>{name}</h2>
       <img className={styles.image} src={imageUrl} alt={name} />
-      <p>{description}</p>
+      <h2>{name}</h2>
+      <p>
+        {description.slice(0, 100)}
+        {description.length > 100 ? "..." : ""}
+      </p>
     </div>
   );
 }

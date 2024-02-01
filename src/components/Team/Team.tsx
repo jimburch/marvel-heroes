@@ -23,7 +23,7 @@ export default function Team({ team, setTeam }: TeamProps) {
       <div className={styles.team}>
         {team.length
           ? team.map((hero: Hero) => (
-              <div key={hero.id}>
+              <div key={hero.id} className={styles.hero}>
                 <HeroCard
                   id={hero.id}
                   name={hero.name}
