@@ -2,3 +2,9 @@
   background: red;
   width: 100%;
 }
+
+.results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

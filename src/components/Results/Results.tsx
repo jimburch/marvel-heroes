@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getCharacters } from "../../api/characters";
 import styles from "./Results.module.css";
+import { HeroCard } from "../../components";
+import { Hero, HeroResults } from "../../types";
 
 interface ResultsProps {
   setTeam: React.Dispatch<React.SetStateAction<object[]>>;
@@ -8,11 +10,12 @@ interface ResultsProps {
 
 export default function Results({ setTeam }: ResultsProps) {
   const [query, setQuery] = useState("");
+  const [heroResults, setHeroResults] = useState<HeroResults>();
 
   useEffect(() => {
     const fetchHeroes = async () => {
       await getCharacters().then((response) => {
-        console.log(response);
+        setHeroResults(response);
       });
     };
     fetchHeroes();
@@ -21,7 +24,7 @@ export default function Results({ setTeam }: ResultsProps) {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     await getCharacters(query).then((response) => {
-      console.log(response);
+      setHeroResults(response);
     });
   }
 
@@ -30,12 +33,27 @@ export default function Results({ setTeam }: ResultsProps) {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search for an epic hero..."
           onChange={(e) => setQuery(e.target.value)}
         />
         <button type="submit">Search</button>
       </form>
       <h1>Results</h1>
+      <div className={styles.results}>
+        {heroResults?.results.length &&
+          heroResults?.results.map((hero: Hero) => (
+            <div key={hero.id}>
+              <HeroCard
+                key={hero.id}
+                id={hero.id}
+                name={hero.name}
+                description={hero.description}
+                imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+              />
+              <button>Add to Team</button>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
