@@ -2,3 +2,9 @@
   background: green;
   width: 100%;
 }
+
+.team {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

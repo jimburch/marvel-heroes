@@ -5,7 +5,7 @@ import { HeroCard } from "../../components";
 import { Hero, HeroResults } from "../../types";
 
 interface ResultsProps {
-  setTeam: React.Dispatch<React.SetStateAction<object[]>>;
+  setTeam: React.Dispatch<React.SetStateAction<Hero[]>>;
 }
 
 export default function Results({ setTeam }: ResultsProps) {
@@ -26,6 +26,11 @@ export default function Results({ setTeam }: ResultsProps) {
     await getCharacters(query).then((response) => {
       setHeroResults(response);
     });
+  }
+
+  function handleAddToTeam(e: React.MouseEvent<HTMLButtonElement>, hero: Hero) {
+    e.preventDefault();
+    setTeam((prevTeam) => [...prevTeam, hero]);
   }
 
   return (
@@ -50,7 +55,9 @@ export default function Results({ setTeam }: ResultsProps) {
                 description={hero.description}
                 imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
               />
-              <button>Add to Team</button>
+              <button onClick={(e) => handleAddToTeam(e, hero)}>
+                Add to Team
+              </button>
             </div>
           ))}
       </div>
