@@ -12,6 +12,7 @@ export default function Results({ setTeam }: ResultsProps) {
   const [query, setQuery] = useState("");
   const [heroResults, setHeroResults] = useState<HeroResults>();
   const [offset, setOffset] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchHeroes = async () => {
@@ -19,17 +20,20 @@ export default function Results({ setTeam }: ResultsProps) {
         setHeroResults(response);
       });
     };
-    fetchHeroes();
+    fetchHeroes().then(() => setIsLoading(false));
   }, []);
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement | HTMLButtonElement>,
   ) {
     e.preventDefault();
+    setIsLoading(true);
     setOffset(0);
-    await getCharacters({ search: query }).then((response) => {
-      setHeroResults(response);
-    });
+    await getCharacters({ search: query })
+      .then((response) => {
+        setHeroResults(response);
+      })
+      .then(() => setIsLoading(false));
   }
 
   async function handlePagination(
@@ -37,12 +41,13 @@ export default function Results({ setTeam }: ResultsProps) {
     direction: "prev" | "next",
   ) {
     e.preventDefault();
-    const newOffset = direction === "prev" ? offset - 1 : offset + 1;
-    await getCharacters({ search: query, offset: newOffset }).then(
-      (response) => {
+    setIsLoading(true);
+    const newOffset = direction === "prev" ? offset - 10 : offset + 10;
+    await getCharacters({ search: query, offset: newOffset })
+      .then((response) => {
         setHeroResults(response);
-      },
-    );
+      })
+      .then(() => setIsLoading(false));
     setOffset(newOffset);
   }
 
@@ -76,9 +81,9 @@ export default function Results({ setTeam }: ResultsProps) {
         </button>
       </form>
 
-      {heroResults?.results.length ? (
+      {heroResults?.results.length && !isLoading ? (
         <div>
-          <p>{`Showing results ${offset * 20 + 1}-${Math.min((offset + 1) * 20, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
+          <p>{`Showing results ${offset * 10 + 1}-${Math.min((offset + 1) * 10, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
           <button
             disabled={!offset}
             onClick={(e) => handlePagination(e, "prev")}
@@ -87,7 +92,7 @@ export default function Results({ setTeam }: ResultsProps) {
           </button>
           <button
             onClick={(e) => handlePagination(e, "next")}
-            disabled={(offset + 1) * 20 >= heroResults?.total}
+            disabled={(offset + 1) * 10 >= heroResults?.total}
           >
             Next
           </button>
@@ -108,7 +113,11 @@ export default function Results({ setTeam }: ResultsProps) {
             ))}
           </div>
         </div>
-      ) : null}
+      ) : isLoading ? (
+        <img src="/captain-america-loader.gif" alt="loading" />
+      ) : (
+        <p>No results found</p>
+      )}
     </div>
   );
 }
