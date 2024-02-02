@@ -1,11 +1,11 @@
 .root {
-  background: red;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 850px;
   height: auto;
+  padding: 10px;
 }
 
 .results {
@@ -18,16 +18,59 @@
 .hero {
   padding: 10px;
   margin: 5px;
-  background: pink;
+  background: #26268b;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   min-height: 300px;
   width: 220px;
+  border-radius: 5px;
 }
 
 input {
   min-width: 500px;
-  height: 30px;
+  height: 35px;
+  background: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+}
+
+form > button {
+  height: 35px;
+  background: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+form > button:hover {
+  opacity: 0.9;
+}
+
+form > button:active {
+  opacity: 0.7;
+}
+
+.pagination {
+  margin: 10px;
+  line-height: 1.5;
+}
+
+.pagination > p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.pagination > button {
+  background: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+  margin-right: 5px;
 }

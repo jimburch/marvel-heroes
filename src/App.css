@@ -6,7 +6,7 @@
 
 html,
 body {
-  background: navy;
+  background: #191970;
   color: white;
   font-family: "Roboto", sans-serif;
 }
@@ -20,6 +20,5 @@ main {
   min-height: 100vh;
   height: auto;
   margin: 0 auto;
-  background: blue;
   padding: 10px;
 }

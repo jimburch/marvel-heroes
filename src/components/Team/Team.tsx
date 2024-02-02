@@ -23,7 +23,7 @@ export default function Team({ team, setTeam }: TeamProps) {
         {Array.from({ length: 5 }).map((_, index) => {
           const hero = team[index];
           return (
-            <div key={hero ? hero.id : index} className={styles.hero}>
+            <div key={index} className={styles.hero}>
               {hero ? (
                 <HeroCard
                   name={hero.name}

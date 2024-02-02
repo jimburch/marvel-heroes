@@ -14,7 +14,7 @@ function App() {
         <h3>Build Your Team. Save the World.</h3>
       </div>
       <Team team={team} setTeam={setTeam} />
-      <Results setTeam={setTeam} />
+      <Results team={team} setTeam={setTeam} />
     </main>
   );
 }
