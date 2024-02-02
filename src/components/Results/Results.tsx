@@ -83,7 +83,7 @@ export default function Results({ setTeam }: ResultsProps) {
 
       {heroResults?.results.length && !isLoading ? (
         <div>
-          <p>{`Showing results ${offset * 10 + 1}-${Math.min((offset + 1) * 10, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
+          <p>{`Showing results ${offset + 1}-${Math.min(offset + 10, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
           <button
             disabled={!offset}
             onClick={(e) => handlePagination(e, "prev")}
