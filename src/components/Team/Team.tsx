@@ -20,21 +20,27 @@ export default function Team({ team, setTeam }: TeamProps) {
   return (
     <div className={styles.root}>
       <div className={styles.team}>
-        {team.length
-          ? team.map((hero: Hero) => (
-              <div key={hero.id} className={styles.hero}>
+        {Array.from({ length: 5 }).map((_, index) => {
+          const hero = team[index];
+          return (
+            <div key={hero ? hero.id : index} className={styles.hero}>
+              {hero ? (
                 <HeroCard
-                  id={hero.id}
                   name={hero.name}
                   description={hero.description}
                   imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
                 />
+              ) : (
+                <HeroCard skeleton />
+              )}
+              {hero && (
                 <button onClick={(e) => handleRemoveFromTeam(e, hero)}>
                   Remove from Team
                 </button>
-              </div>
-            ))
-          : null}
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

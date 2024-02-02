@@ -101,7 +101,6 @@ export default function Results({ setTeam }: ResultsProps) {
               <div key={hero.id} className={styles.hero}>
                 <HeroCard
                   key={hero.id}
-                  id={hero.id}
                   name={hero.name}
                   description={hero.description}
                   imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}

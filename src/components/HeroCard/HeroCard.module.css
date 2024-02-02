@@ -3,13 +3,22 @@
   flex-direction: column;
   max-width: 200px;
   text-align: center;
+  min-height: 405px;
 }
 
 .root > * {
   margin-bottom: 4px;
 }
 
-.image {
-  max-height: 200px;
-  width: auto;
+.container {
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
