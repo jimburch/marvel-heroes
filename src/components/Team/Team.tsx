@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Team.module.css";
 import { Hero } from "../../types";
-import HeroCard from "../HeroCard/HeroCard";
+import { Button, HeroCard } from "../index";
 
 type TeamProps = {
   team: Hero[] | [];
@@ -34,14 +34,15 @@ export default function Team({ team, setTeam }: TeamProps) {
                 <HeroCard skeleton />
               )}
               {hero && (
-                <button onClick={(e) => handleRemoveFromTeam(e, hero)}>
-                  Remove from Team
-                </button>
+                <Button onClick={(e) => handleRemoveFromTeam(e, hero)}>
+                  Disband
+                </Button>
               )}
             </div>
           );
         })}
       </div>
+      <p>{`Choose ${5 - team.length} more to complete your team`}</p>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCharacters } from "../../api/characters";
 import styles from "./Results.module.css";
-import { HeroCard } from "../../components";
+import { Button, HeroCard } from "../../components";
 import { Hero, HeroResults } from "../../types";
 
 interface ResultsProps {
@@ -37,6 +37,18 @@ export default function Results({ team, setTeam }: ResultsProps) {
       .then(() => setIsLoading(false));
   }
 
+  async function handleReset(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    if (query) {
+      setIsLoading(true);
+      setQuery("");
+      await getCharacters({}).then((response) => {
+        setHeroResults(response);
+      });
+      setIsLoading(false);
+    }
+  }
+
   async function handlePagination(
     e: React.MouseEvent<HTMLButtonElement>,
     direction: "prev" | "next",
@@ -68,38 +80,35 @@ export default function Results({ team, setTeam }: ResultsProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
-        <button
-          onClick={() => {
-            setQuery("");
-            const inputElement = document.querySelector(
-              'input[type="text"]',
-            ) as HTMLInputElement;
-            if (inputElement) {
-              inputElement.value = "";
-            }
+        <Button type="submit" size="large">
+          Search
+        </Button>
+        <Button
+          size="large"
+          onClick={(e) => {
+            handleReset(e);
           }}
         >
           Reset
-        </button>
+        </Button>
       </form>
 
       {heroResults?.results.length && !isLoading ? (
         <div style={{ width: "100%" }}>
           <div className={styles.pagination}>
             <p>{`Showing results ${offset + 1}-${Math.min(offset + 10, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
-            <button
+            <Button
               disabled={!offset}
               onClick={(e) => handlePagination(e, "prev")}
             >
               Previous
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={(e) => handlePagination(e, "next")}
               disabled={(offset + 1) * 10 >= heroResults?.total}
             >
               Next
-            </button>
+            </Button>
           </div>
           <div className={styles.results}>
             {heroResults?.results.map((hero: Hero) => (
@@ -110,9 +119,9 @@ export default function Results({ team, setTeam }: ResultsProps) {
                   description={hero.description}
                   imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
                 />
-                <button onClick={(e) => handleAddToTeam(e, hero)}>
-                  Add to Team
-                </button>
+                <Button onClick={(e) => handleAddToTeam(e, hero)}>
+                  Recruit
+                </Button>
               </div>
             ))}
           </div>

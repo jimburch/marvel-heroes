@@ -1,0 +1,35 @@
+button {
+  background: white;
+  color: midnightblue;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.large {
+  height: 35px;
+  font-size: 20px;
+}
+
+.medium {
+  height: 30px;
+  font-size: 18px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:active {
+  opacity: 0.6;
+}
+
+button:focus {
+  outline: 1px solid midnightblue;
+}
+
+button:disabled {
+  background: #f4f4f4;
+  color: #c4c4c4;
+  cursor: not-allowed;
+}
