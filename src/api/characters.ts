@@ -13,7 +13,7 @@ export const getCharacters = async ({ search, offset }: GetCharactersProps) => {
   const seachQuery = search ? `&nameStartsWith=${search}` : "";
   const offsetQuery = offset ? `&offset=${offset}` : "";
 
-  const url = `http://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}&limit=10${seachQuery}${offsetQuery}`;
+  const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}&limit=10${seachQuery}${offsetQuery}`;
 
   return fetch(url)
     .then((response) => response.json())
