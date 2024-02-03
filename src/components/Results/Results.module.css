@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 850px;
   height: auto;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .results {
@@ -13,6 +13,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  background: midnightblue;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .hero {
@@ -38,6 +41,10 @@ input {
   font-size: 20px;
 }
 
+form {
+  padding: 25px 0px;
+}
+
 form > button {
   height: 35px;
   background: white;
@@ -58,7 +65,7 @@ form > button:active {
 
 .pagination {
   margin: 10px;
-  line-height: 1.5;
+  line-height: 1.8;
 }
 
 .pagination > p {

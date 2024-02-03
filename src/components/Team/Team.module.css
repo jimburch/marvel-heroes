@@ -1,6 +1,8 @@
 .root {
   width: 100%;
   padding: 10px;
+  background: midnightblue;
+  border-radius: 5px;
 }
 
 .team {

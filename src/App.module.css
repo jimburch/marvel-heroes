@@ -1,0 +1,11 @@
+.title {
+  width: 100%;
+  margin: 25px;
+  text-align: center;
+}
+
+.title h1 {
+  font-family: "Avenger", sans-serif;
+  font-size: 5em;
+  margin: 10px;
+}

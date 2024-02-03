@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Results, Team } from "./components";
 
-import "./App.css";
+import styles from "./App.module.css";
 import { Hero } from "./types";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <main>
-      <div className="title">
+      <div className={styles.title}>
         <h1>Assemble!</h1>
         <h3>Build Your Team. Save the World.</h3>
       </div>
