@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+.root > p {
+  font-weight: bold;
+}
+
 .team {
   display: flex;
   flex-direction: row;
@@ -29,4 +33,19 @@
   min-height: 400px;
   width: 220px;
   border-radius: 5px;
+}
+
+.teamWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centeredText {
+  position: absolute;
+  font-size: 100px;
+  font-family: "Avenger", sans-serif;
+  z-index: 99;
+  /* max-width: 100%; */
 }
