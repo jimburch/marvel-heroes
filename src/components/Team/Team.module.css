@@ -54,3 +54,34 @@
   font-size: 45px;
   font-family: "Avenger", sans-serif;
 }
+
+.thanos {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  all: unset;
+  transition:
+    transform 0.3s,
+    width 0.3s;
+}
+
+.thanos:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.thanos:focus {
+  border: none;
+  outline: none;
+}
+
+.thanos:active {
+  border: none;
+  outline: none;
+}
+
+.thanos img {
+  width: 75px;
+}

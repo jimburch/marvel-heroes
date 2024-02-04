@@ -40,6 +40,19 @@ export default function Team({ team, setTeam }: TeamProps) {
     setTeam((prevTeam) => prevTeam.filter((member) => member.id !== hero.id));
   }
 
+  function handleSnap(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    setTeam((prevTeam) => {
+      const teamCopy = [...prevTeam];
+      const numToRemove = Math.random() < 0.5 ? 3 : 2;
+      for (let i = 0; i < numToRemove; i++) {
+        const randomIndex = Math.floor(Math.random() * teamCopy.length);
+        teamCopy.splice(randomIndex, 1);
+      }
+      return teamCopy;
+    });
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.teamWrapper}>
@@ -79,7 +92,18 @@ export default function Team({ team, setTeam }: TeamProps) {
       {renderTeamName ? (
         <span style={{ marginTop: 20 }}>
           {teamName ? (
-            <p className={styles.teamName}>{`Introducing... ${teamName}`}</p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <p className={styles.teamName}>{`Introducing... ${teamName}`}</p>
+              <button className={styles.thanos} onClick={handleSnap}>
+                <img src="./thanos.png" alt="thanos" />
+              </button>
+            </div>
           ) : (
             <div
               style={{
