@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Team.module.css";
 import { Hero } from "../../types";
-import { Button, HeroCard } from "../index";
+import { Button, HeroCard, Loader } from "../index";
+import generateGptResponse from "../../api/openai";
 
 type TeamProps = {
   team: Hero[] | [];
@@ -9,6 +10,28 @@ type TeamProps = {
 };
 
 export default function Team({ team, setTeam }: TeamProps) {
+  const [teamName, setTeamName] = useState("");
+  const [renderTeamName, setRenderTeamName] = useState(false);
+
+  useEffect(() => {
+    if (teamName && team.length < 5) {
+      setTeamName("");
+    }
+
+    if (team.length === 5) {
+      setRenderTeamName(true);
+      const fetchTeamName = async () => {
+        await generateGptResponse(team).then((response) => {
+          setTeamName(response);
+        });
+      };
+      fetchTeamName();
+    } else {
+      setRenderTeamName(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [team]);
+
   function handleRemoveFromTeam(
     e: React.MouseEvent<HTMLButtonElement>,
     hero: Hero,
@@ -52,6 +75,26 @@ export default function Team({ team, setTeam }: TeamProps) {
       </div>
       {team.length && team.length < 5 ? (
         <p>{`Choose ${5 - team.length} more to complete your team`}</p>
+      ) : null}
+      {renderTeamName ? (
+        <span style={{ marginTop: 20 }}>
+          {teamName ? (
+            <p className={styles.teamName}>{`Introducing... ${teamName}`}</p>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <p className={styles.teamName} style={{ marginRight: 20 }}>
+                Introducing
+              </p>
+              <Loader />
+            </div>
+          )}
+        </span>
       ) : null}
     </div>
   );

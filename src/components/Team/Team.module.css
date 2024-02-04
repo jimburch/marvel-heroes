@@ -6,6 +6,7 @@
   background: midnightblue;
   border-radius: 5px;
   align-items: center;
+  min-height: 560px;
 }
 
 .root > p {
@@ -47,5 +48,9 @@
   font-size: 100px;
   font-family: "Avenger", sans-serif;
   z-index: 99;
-  /* max-width: 100%; */
+}
+
+.teamName {
+  font-size: 45px;
+  font-family: "Avenger", sans-serif;
 }
