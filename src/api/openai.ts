@@ -10,7 +10,7 @@ export default async function generateGptResponse(heroes: Hero[]) {
       Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
-      model: "gpt-4-turbo-preview",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "assistant",

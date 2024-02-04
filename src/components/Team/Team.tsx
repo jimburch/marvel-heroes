@@ -55,7 +55,7 @@ export default function Team({ team, setTeam }: TeamProps) {
 
   function handleTweet(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const referringUrl = document.referrer;
+    const referringUrl = window.location.href;
     const tweetText = `${teamName}... Assemble!\n\n${team.map((hero) => `- ${hero.name}`).join("\n")}.\n\nCan you beat this squad?\n\n${referringUrl}`;
 
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
