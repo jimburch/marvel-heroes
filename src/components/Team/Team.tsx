@@ -53,6 +53,15 @@ export default function Team({ team, setTeam }: TeamProps) {
     });
   }
 
+  function handleTweet(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const referringUrl = document.referrer;
+    const tweetText = `${teamName}... Assemble!\n\n${team.map((hero) => `- ${hero.name}`).join("\n")}.\n\nCan you beat this squad?\n\n${referringUrl}`;
+
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+    window.open(tweetUrl, "_blank");
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.teamWrapper}>
@@ -102,6 +111,9 @@ export default function Team({ team, setTeam }: TeamProps) {
               <p className={styles.teamName}>{`Introducing... ${teamName}`}</p>
               <button className={styles.thanos} onClick={handleSnap}>
                 <img src="./thanos.png" alt="thanos" />
+              </button>
+              <button className={styles.thanos} onClick={handleTweet}>
+                <img src="./twitter.png" alt="twitter" />
               </button>
             </div>
           ) : (
