@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Hulk, Results, Team } from "./components";
-
 import styles from "./App.module.css";
 import { Hero } from "./types";
 

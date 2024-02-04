@@ -13,7 +13,7 @@
 
 ## Stack
 
-- React (Create React App)
+- React (Create React App - go-to for quick projects)
 - CSS modules
 - CryptoJS (hash generation for Marvel API)
 - Jest & React-testing library
@@ -26,11 +26,13 @@ In a personal project, I might add to this list -- Next.js or other fully-featur
 - Team name: Once five heroes are selected, a request is sent to OpenAI to generate a unique team name based on the collection of characters.
 - Thanos snap: After a team name is generated, you can click the "Thanos" button to delete half the team -- two or three members at random.
 - Tweet team: Opens a draft in a new window with the team name, members, and a CTA to create a team of your own.
-- Open the app on mobile for a fun message
+- Testing: included some simple unit tests for App and Team components.
+- Open the app on mobile for a fun message.
 
 ## How I Would Scale
 
 - Global state management: I'm not a fan of useState and prop drilling but thought it was simplistic and fitting for a single state (team) at the root level with just one layer of components accepting the state. If the app were to grow I would use React Context or another reducer/store for better management.
+- Environment variables: I would create a server layer for the API so the keys do not bundle with the rest of the React build (something like Next would solve this already).
 
 ## Challenges
 

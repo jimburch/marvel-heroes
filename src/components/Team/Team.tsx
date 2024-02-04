@@ -111,13 +111,7 @@ export default function Team({ team, setTeam }: TeamProps) {
               </button>
             </div>
           ) : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <div className={styles.teamNameContainer}>
               <p className={styles.teamName} style={{ marginRight: 20 }}>
                 Introducing
               </p>
