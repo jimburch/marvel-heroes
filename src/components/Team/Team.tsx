@@ -101,19 +101,13 @@ export default function Team({ team, setTeam }: TeamProps) {
       {renderTeamName ? (
         <span style={{ marginTop: 20 }}>
           {teamName ? (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <div className={styles.teamNameContainer}>
               <p className={styles.teamName}>{`Introducing... ${teamName}`}</p>
-              <button className={styles.thanos} onClick={handleSnap}>
-                <img src="./thanos.png" alt="thanos" />
+              <button className={styles.teamNameButton} onClick={handleSnap}>
+                <img src="./thanos.png" alt="thanos" style={{ width: 75 }} />
               </button>
-              <button className={styles.thanos} onClick={handleTweet}>
-                <img src="./twitter.png" alt="twitter" />
+              <button className={styles.teamNameButton} onClick={handleTweet}>
+                <img src="./twitter.png" alt="twitter" style={{ width: 55 }} />
               </button>
             </div>
           ) : (

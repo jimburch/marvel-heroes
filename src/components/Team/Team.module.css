@@ -55,7 +55,17 @@
   font-family: "Avenger", sans-serif;
 }
 
-.thanos {
+.teamNameContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.teamNameContainer > * {
+  margin-right: 5px;
+}
+
+.teamNameButton {
   margin-left: 10px;
   background: none;
   border: none;
@@ -68,20 +78,16 @@
     width 0.3s;
 }
 
-.thanos:hover {
+.teamNameButton:hover {
   transform: scale(1.1) rotate(10deg);
 }
 
-.thanos:focus {
+.teamNameButton:focus {
   border: none;
   outline: none;
 }
 
-.thanos:active {
+.teamNameButton:active {
   border: none;
   outline: none;
-}
-
-.thanos img {
-  width: 75px;
 }

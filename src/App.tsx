@@ -12,7 +12,6 @@ function App() {
       <div className={styles.desktop}>
         <div className={styles.title}>
           <h1>Assemble!</h1>
-          <h3>Build Your Team. Save the World.</h3>
         </div>
         <Team team={team} setTeam={setTeam} />
         <Results team={team} setTeam={setTeam} />
