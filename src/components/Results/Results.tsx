@@ -94,7 +94,7 @@ export default function Results({ team, setTeam }: ResultsProps) {
       </form>
 
       <div className={styles.pagination}>
-        <p>{`Showing results ${heroResults?.total ? offset + 1 : 0}-${Math.min(offset + 10, heroResults?.total ?? 0)} of ${heroResults?.total || "..."}`}</p>
+        <p>{`Showing results ${heroResults?.total ? offset + 1 : 0}-${Math.min(offset + 10, heroResults?.total ?? 0)} of ${heroResults?.total || 0}`}</p>
         <Button disabled={!offset} onClick={(e) => handlePagination(e, "prev")}>
           Previous
         </Button>
