@@ -123,7 +123,7 @@ export default function Results({ team, setTeam }: ResultsProps) {
                     key={hero.id}
                     name={hero.name}
                     description={hero.description}
-                    imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                    imageUrl={`${hero.thumbnail.path}/standard_xlarge.${hero.thumbnail.extension}`}
                   />
                   <Button
                     onClick={(e) => handleAddToTeam(e, hero)}

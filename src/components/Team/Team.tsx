@@ -80,7 +80,7 @@ export default function Team({ team, setTeam }: TeamProps) {
                   <HeroCard
                     name={hero.name}
                     description={hero.description}
-                    imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                    imageUrl={`${hero.thumbnail.path}/standard_xlarge.${hero.thumbnail.extension}`}
                   />
                 ) : (
                   <HeroCard skeleton />
