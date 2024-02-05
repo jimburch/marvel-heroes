@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Hulk, Results, Team } from "./components";
 import styles from "./App.module.css";
 import { Hero } from "./types";
 
 function App() {
   const [team, setTeam] = useState<Hero[]>([]);
+
+  useEffect(() => {
+    if (team.length === 5) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [team]);
 
   return (
     <main>
