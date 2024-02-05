@@ -55,6 +55,7 @@ form > * {
 .pagination {
   margin: 10px;
   line-height: 1.8;
+  width: 100%;
 }
 
 .pagination > * {

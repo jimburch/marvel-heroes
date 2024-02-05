@@ -93,23 +93,21 @@ export default function Results({ team, setTeam }: ResultsProps) {
         </Button>
       </form>
 
+      <div className={styles.pagination}>
+        <p>{`Showing results ${heroResults?.total ? offset + 1 : 0}-${Math.min(offset + 10, heroResults?.total ?? 0)} of ${heroResults?.total || "..."}`}</p>
+        <Button disabled={!offset} onClick={(e) => handlePagination(e, "prev")}>
+          Previous
+        </Button>
+        <Button
+          onClick={(e) => handlePagination(e, "next")}
+          disabled={(offset + 1) * 10 >= (heroResults?.total ?? 0)}
+        >
+          Next
+        </Button>
+      </div>
+
       {heroResults?.results.length && !isLoading ? (
         <div style={{ width: "100%" }}>
-          <div className={styles.pagination}>
-            <p>{`Showing results ${offset + 1}-${Math.min(offset + 10, heroResults?.total || 0)} of ${heroResults?.total}`}</p>
-            <Button
-              disabled={!offset}
-              onClick={(e) => handlePagination(e, "prev")}
-            >
-              Previous
-            </Button>
-            <Button
-              onClick={(e) => handlePagination(e, "next")}
-              disabled={(offset + 1) * 10 >= heroResults?.total}
-            >
-              Next
-            </Button>
-          </div>
           <div className={styles.results}>
             {heroResults?.results.map((hero: Hero) => {
               const disabled = team.find((member) => member.id === hero.id)
