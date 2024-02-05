@@ -111,19 +111,31 @@ export default function Results({ team, setTeam }: ResultsProps) {
             </Button>
           </div>
           <div className={styles.results}>
-            {heroResults?.results.map((hero: Hero) => (
-              <div key={hero.id} className={styles.hero}>
-                <HeroCard
+            {heroResults?.results.map((hero: Hero) => {
+              const disabled = team.find((member) => member.id === hero.id)
+                ? true
+                : false;
+              return (
+                <div
                   key={hero.id}
-                  name={hero.name}
-                  description={hero.description}
-                  imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-                />
-                <Button onClick={(e) => handleAddToTeam(e, hero)}>
-                  Recruit
-                </Button>
-              </div>
-            ))}
+                  className={styles.hero}
+                  style={{ opacity: disabled ? "25%" : "100%" }}
+                >
+                  <HeroCard
+                    key={hero.id}
+                    name={hero.name}
+                    description={hero.description}
+                    imageUrl={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                  />
+                  <Button
+                    onClick={(e) => handleAddToTeam(e, hero)}
+                    disabled={disabled}
+                  >
+                    {disabled ? "Selected" : "Recruit"}
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : isLoading ? (
